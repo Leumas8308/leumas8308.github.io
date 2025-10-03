@@ -23,14 +23,14 @@ button:hover { background: #ffd633; }
 #result { margin-top: 30px; }
 #result img { image-rendering: pixelated; width: 96px; height: auto; }
 #loading {
-  display: none;
+  display: none;       /* hidden by default */
   font-size: 18px;
   margin-top: 20px;
-  color: #000;
   background: #ffcb05;
   padding: 10px 20px;
   border-radius: 8px;
-  display: inline-block;
+  color: #000;
+  visibility: hidden;  /* ensure it doesn't occupy space before button click */
 }
 select {
   margin-top: 10px;
@@ -120,14 +120,18 @@ async function fetchAbilities(maxGen) {
 
 async function generatePokemon() {
   const loading = document.getElementById("loading");
-  loading.style.display = "inline-block";
   const resultDiv = document.getElementById("result");
+
+  // Show loading indicator
+  loading.style.visibility = "visible";
+  loading.style.display = "inline-block";
   resultDiv.innerHTML = "";
 
   const gameGen = parseInt(document.getElementById("gameGen").value);
   if(!gameGen) {
     alert("Select a game generation!");
     loading.style.display = "none";
+    loading.style.visibility = "hidden";
     return;
   }
 
@@ -138,6 +142,7 @@ async function generatePokemon() {
   if (categoryChecks.length === 0) {
     alert("Select at least one category!");
     loading.style.display = "none";
+    loading.style.visibility = "hidden";
     return;
   }
 
@@ -145,12 +150,13 @@ async function generatePokemon() {
   if(abilities.length === 0) {
     alert("No abilities found for this game generation!");
     loading.style.display = "none";
+    loading.style.visibility = "hidden";
     return;
   }
 
   let pool = [];
 
-  // Fetch Pokémon from all generations ≤ selected game generation
+  // Fetch Pokémon from all generations <= selected game generation
   for(let gen = 1; gen <= gameGen; gen++) {
     try {
       const res = await fetch(`https://pokeapi.co/api/v2/generation/${gen}`);
@@ -172,6 +178,7 @@ async function generatePokemon() {
   if(pool.length === 0) {
     alert("No Pokémon match that filter!");
     loading.style.display = "none";
+    loading.style.visibility = "hidden";
     return;
   }
 
@@ -186,8 +193,11 @@ async function generatePokemon() {
     <p><b>Nature:</b> ${nature}</p>
   `;
 
+  // Hide loading indicator after generation
   loading.style.display = "none";
+  loading.style.visibility = "hidden";
 }
+
 </script>
 </body>
 </html>

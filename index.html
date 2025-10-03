@@ -22,6 +22,23 @@ button {
 button:hover { background: #ffd633; }
 #result { margin-top: 30px; }
 #result img { image-rendering: pixelated; width: 96px; height: auto; }
+#loading {
+  display: none;
+  font-size: 18px;
+  margin-top: 20px;
+  color: #000;
+  background: #ffcb05;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+}
+select {
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
 </style>
 </head>
 <body>
@@ -30,13 +47,16 @@ button:hover { background: #ffd633; }
 <div class="container">
   <div class="box">
     <h3>Game Generation</h3>
-    <label><input type="checkbox" value="3"> Gen 3</label><br>
-    <label><input type="checkbox" value="4"> Gen 4</label><br>
-    <label><input type="checkbox" value="5"> Gen 5</label><br>
-    <label><input type="checkbox" value="6"> Gen 6</label><br>
-    <label><input type="checkbox" value="7"> Gen 7</label><br>
-    <label><input type="checkbox" value="8"> Gen 8</label><br>
-    <label><input type="checkbox" value="9"> Gen 9</label>
+    <select id="gameGen">
+      <option value="">Select Game Gen</option>
+      <option value="3">Gen 3</option>
+      <option value="4">Gen 4</option>
+      <option value="5">Gen 5</option>
+      <option value="6">Gen 6</option>
+      <option value="7">Gen 7</option>
+      <option value="8">Gen 8</option>
+      <option value="9">Gen 9</option>
+    </select>
   </div>
 
   <div class="box">
@@ -49,7 +69,7 @@ button:hover { background: #ffd633; }
 </div>
 
 <button onclick="generatePokemon()">Generate</button>
-
+<div id="loading">Loading Pokémon...</div>
 <div id="result"></div>
 
 <script>
@@ -95,34 +115,43 @@ async function loadAbilities() {
 
 async function fetchAbilities(maxGen) {
   const abilities = await loadAbilities();
-  // Only include abilities with gen >= 3 AND <= selected maxGen
   return abilities.filter(a => a.gen >= 3 && a.gen <= maxGen).map(a => a.name);
 }
 
 async function generatePokemon() {
-  const genChecks = [...document.querySelectorAll('.box input[type="checkbox"][value]')]
-    .filter(cb => cb.checked && !isNaN(cb.value))
-    .map(cb => parseInt(cb.value));
+  const loading = document.getElementById("loading");
+  loading.style.display = "inline-block";
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = "";
+
+  const gameGen = parseInt(document.getElementById("gameGen").value);
+  if(!gameGen) {
+    alert("Select a game generation!");
+    loading.style.display = "none";
+    return;
+  }
 
   const categoryChecks = [...document.querySelectorAll('.box input[type="checkbox"][value]')]
     .filter(cb => cb.checked && isNaN(cb.value))
     .map(cb => cb.value);
 
-  if (genChecks.length === 0 || categoryChecks.length === 0) {
-    alert("Select at least one game generation and one category!");
+  if (categoryChecks.length === 0) {
+    alert("Select at least one category!");
+    loading.style.display = "none";
     return;
   }
 
-  const maxGen = Math.max(...genChecks);
-  let abilities = await fetchAbilities(maxGen);
+  let abilities = await fetchAbilities(gameGen);
   if(abilities.length === 0) {
     alert("No abilities found for this game generation!");
+    loading.style.display = "none";
     return;
   }
 
   let pool = [];
 
-  for(const gen of genChecks) {
+  // Fetch Pokémon from all generations ≤ selected game generation
+  for(let gen = 1; gen <= gameGen; gen++) {
     try {
       const res = await fetch(`https://pokeapi.co/api/v2/generation/${gen}`);
       const data = await res.json();
@@ -142,6 +171,7 @@ async function generatePokemon() {
 
   if(pool.length === 0) {
     alert("No Pokémon match that filter!");
+    loading.style.display = "none";
     return;
   }
 
@@ -149,12 +179,14 @@ async function generatePokemon() {
   const ability = abilities[Math.floor(Math.random() * abilities.length)];
   const nature = natures[Math.floor(Math.random() * natures.length)];
 
-  document.getElementById("result").innerHTML = `
+  resultDiv.innerHTML = `
     <h2>${capitalize(randomPokemon)}</h2>
     <img src="${getSpriteUrl(randomPokemon)}" alt="${randomPokemon}">
     <p><b>Ability:</b> ${ability}</p>
     <p><b>Nature:</b> ${nature}</p>
   `;
+
+  loading.style.display = "none";
 }
 </script>
 </body>

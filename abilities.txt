@@ -15,12 +15,10 @@ Early Bird, 3
 Effect Spore, 3
 Flame Body, 3
 Flash Fire, 3
-Forecast, 3
 Guts, 3
 Huge Power, 3
 Hustle, 3
 Hyper Cutter, 3
-Illuminate, 3
 Immunity, 3
 Inner Focus, 3
 Insomnia, 3
@@ -33,20 +31,17 @@ Liquid Ooze, 3
 Magma Armor, 3
 Magnet Pull, 3
 Marvel Scale, 3
-Minus, 3
 Natural Cure, 3
 Oblivious, 3
 Overgrow, 3
 Own Tempo, 3
 Pickup, 3
-Plus, 3
 Poison Point, 3
 Pressure, 3
 Pure Power, 3
 Rain Dish, 3
 Rock Head, 3
 Rough Skin, 3
-Run Away, 3
 Sand Stream, 3
 Sand Veil, 3
 Serene Grace, 3
@@ -67,7 +62,6 @@ Synchronize, 3
 Thick Fat, 3
 Torrent, 3
 Trace, 3
-Truant, 3
 Vital Spirit, 3
 Volt Absorb, 3
 Water Absorb, 3
@@ -87,18 +81,15 @@ Forewarn, 4
 Frisk, 4
 Gluttony, 4
 Heatproof, 4
-Honey Gather, 4
 Hydration, 4
 Ice Body, 4
 Iron Fist, 4
-Klutz, 4
 Leaf Guard, 4
 Magic Guard, 4
 Mold Breaker, 4
 Motor Drive, 4
 Multitype, 4
 No Guard, 4
-Normalize, 4
 Poison Heal, 4
 Quick Feet, 4
 Reckless, 4
@@ -106,13 +97,11 @@ Rivalry, 4
 Scrappy, 4
 Simple, 4
 Skill Link, 4
-Slow Start, 4
 Sniper, 4
 Snow Cloak, 4
 Snow Warning, 4
 Solar Power, 4
 Solid Rock, 4
-Stall, 4
 Steadfast, 4
 Storm Drain, 4
 Super Luck, 4
@@ -125,19 +114,15 @@ Analytic, 5
 Big Pecks, 5
 Contrary, 5
 Cursed Body, 5
-Defeatist, 5
 Defiant, 5
 Flare Boost, 5
-Friend Guard, 5
 Harvest, 5
 Healer, 5
-Heavy Metal, 5
 Illusion, 5
 Imposter, 5
 Infiltrator, 5
 Iron Barbs, 5
 Justified, 5
-Light Metal, 5
 Magic Bounce, 5
 Moody, 5
 Moxie, 5
@@ -153,7 +138,6 @@ Sand Force, 5
 Sand Rush, 5
 Sap Sipper, 5
 Sheer Force, 5
-Telepathy, 5
 Teravolt, 5
 Toxic Boost, 5
 Turboblaze, 5
@@ -161,7 +145,6 @@ Unnerve, 5
 Victory Star, 5
 Weak Armor, 5
 Wonder Skin, 5
-Zen Mode, 5
 Aerilate, 6
 Aroma Veil, 6
 Aura Break, 6
@@ -190,7 +173,6 @@ Sweet Veil, 6
 Symbiosis, 6
 Tough Claws, 6
 Battery, 7
-Battle Bond, 7
 Beast Boost, 7
 Berserk, 7
 Comatose, 7
@@ -217,9 +199,7 @@ Psychic Surge, 7
 Queenly Majesty, 7
 Receiver, 7
 RKS System, 7
-Schooling, 7
 Shadow Shield, 7
-Shields Down, 7
 Slush Rush, 7
 Soul-Heart, 7
 Stakeout, 7
